@@ -1,0 +1,5 @@
+- name: Create JobScheduler Group
+  user: name=scheduler comment="For JobScheduler Group" state=present
+
+- name: Create JobScheduler User
+  user: name=scheduler update_password=always password="$6$qEkkXjsT$1CPLGtmIMVDMjf2VUdblZB6ljxfCGBP7bLaCO5lQRiFK1aQaCqZhNY7C8f80K7p3ha6IPlTn1/KCy3QazI8PU." shell=/bin/bash groups=scheduler append=yes comment="For JobScheduler User"

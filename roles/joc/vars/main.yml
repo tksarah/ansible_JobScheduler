@@ -1,0 +1,14 @@
+js_version: 1.10.3
+js_src: jobscheduler_linux-x64.{{ js_version }}.tar.gz
+jdir: jobscheduler.{{ js_version }}
+
+installpath: /opt/sos-berlin.com/jobscheduler
+UserPathPanelElement: /home/scheduler/sos-berlin.com/jobscheduler
+schedulerAllowedHost: 0.0.0.0
+databaseHost: localhost
+databaseSchema: scheduler
+databaseUser: scheduler
+databasePassword: schedulerpassword
+
+sample_dir: /home/scheduler/sos-berlin.com/jobscheduler/scheduler/config/live/sample
+agent_srv_addr: 10.1.1.92

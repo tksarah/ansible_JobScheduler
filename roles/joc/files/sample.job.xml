@@ -1,0 +1,7 @@
+<job title="sample job" process_class="sample-agent">
+	<script language="shell">
+		<![CDATA[
+echo "Hello world!"
+		]]>
+	</script>
+</job>

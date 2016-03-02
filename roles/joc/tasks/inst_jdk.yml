@@ -1,0 +1,5 @@
+- name: Download OracleJDK
+  copy: src=./files/jre-8u73-linux-x64.rpm dest=/tmp/jre-8u73-linux-x64.rpm 
+
+- name: Install OracleJDK
+  yum: name=/tmp/jre-8u73-linux-x64.rpm state=present

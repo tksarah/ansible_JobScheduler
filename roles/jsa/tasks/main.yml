@@ -1,0 +1,21 @@
+- include: create_user.yml
+- include: inst_jdk.yml
+
+- block:
+  - name: Create Directory
+    file: path={{ installpath }} state=directory owner=scheduler group=scheduler mode=0755
+
+  - name: Install Agent
+    unarchive: src=jobscheduler_unix_universal_agent.{{ js_version }}.tar.gz dest={{ installpath }} owner=scheduler creates={{ installpath }}/jobscheduler_agent
+
+  - name: Copy init script
+    template: src=jobscheduler_agent_instance.sh.j2 dest=/etc/init.d/jobscheduler_agent mode=755 owner=root group=root
+
+  - name: Regist and Agent
+    service: name=jobscheduler_agent enabled=yes state=started
+
+#  - name: Start Agent
+#    service: name=jobscheduler_agent state=started 
+
+  tags: agent
+

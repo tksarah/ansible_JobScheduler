@@ -1,0 +1,11 @@
+- name: Pre install package
+  yum: name=sudo state=present
+
+- name: Add sudoers
+  lineinfile: dest=/etc/sudoers state=present line='%scheduler ALL=(ALL) NOPASSWD:ALL'
+
+- name: Create JobScheduler Group
+  user: name={{ juser }} comment="For JobScheduler Group" state=present
+
+- name: Create JobScheduler User
+  user: name={{ juser }} update_password=always password="$6$qEkkXjsT$1CPLGtmIMVDMjf2VUdblZB6ljxfCGBP7bLaCO5lQRiFK1aQaCqZhNY7C8f80K7p3ha6IPlTn1/KCy3QazI8PU." shell=/bin/bash groups={{ juser }} append=yes comment="For JobScheduler User"

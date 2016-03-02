@@ -1,0 +1,28 @@
+- block:
+
+  - name: Copy a file
+    copy: src=./files/{{ js_src }} dest=/tmp/{{ js_src }} mode=0644
+  - name: Unarchive a file
+    unarchive: src=/tmp/{{ js_src }} dest=/tmp copy=no creates=/tmp/{{ jdir }}
+  - name: Edit install.xml
+    template: src=jobscheduler_install.xml.j2 dest=/tmp/{{ jdir }}/jobscheduler_install.xml backup=yes
+  - name: Install JobScheduler Engine
+    shell: /tmp/{{ jdir }}/setup.sh /tmp/{{ jdir }}/jobscheduler_install.xml creates="{{ installpath }}"
+
+  - name: For Japanese
+    replace: dest=/home/scheduler/sos-berlin.com/jobscheduler/scheduler/config/operations_gui/custom.js regexp='^_sos_lang(\s+)\=(\s+)\'(.*)\'\;$' replace='_sos_lang\1=\2\'ja\';' backup=yes
+    when: sos_lang == 'ja'
+
+  - name: Create sample directory
+    file: path={{ sample_dir }} state=directory mode=0755
+  - name: Registory sample job
+    copy: src=./files/sample.job.xml dest={{ sample_dir }}/sample.job.xml mode=0644
+  - name: Registory agent process class
+    template: src=sample-agent.process_class.xml.j2 dest={{ sample_dir }}/sample-agent.process_class.xml
+
+  become: true
+  become_user: scheduler
+
+- name: Change owner and group for scheduler
+  file: path=/opt/sos-berlin.com state=directory owner=scheduler group=scheduler recurse=yes
+

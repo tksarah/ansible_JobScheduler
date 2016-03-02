@@ -1,0 +1,14 @@
+- hosts: joc
+  gather_facts: no
+  beome: true
+  beome_user: root
+  roles:
+      - joc
+
+- hosts: jsa
+  gather_facts: no
+  beome: true
+  beome_user: root
+  roles:
+      - jsa
+

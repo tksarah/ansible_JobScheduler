@@ -1,0 +1,17 @@
+- name: Install RDBMS
+  yum: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - MySQL-python
+    - mariadb-server
+  environment:
+    http_proxy: "http://tie304410:SunTakeshi01@10.10.10.10:8080"
+    https_proxy: "http://tie304410:SunTakeshi01@10.10.10.10:8080"
+
+- name: Start Mariadb
+  service: name=mariadb.service enabled=yes state=started enabled=yes
+
+- name: Create database
+  mysql_db: name=scheduler state=present encoding=UTF8
+
+- name: Create Scheduler user
+  mysql_user: user=scheduler password=schedulerpassword priv=*.*:ALL host=localhost state=present

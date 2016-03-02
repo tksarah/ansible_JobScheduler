@@ -1,0 +1,5 @@
+#[joc]
+#10.1.1.98 ansible_user=centos ansible_private_key_file=/home/centos/int_ops_private.key
+[jsa]
+10.1.1.99 ansible_user=centos ansible_private_key_file=/home/centos/int_ops_private.key
+

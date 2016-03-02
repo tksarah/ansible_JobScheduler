@@ -1,0 +1,4 @@
+- name: Pre install package
+  yum: name=sudo state=present
+- name: Add sudoers
+  lineinfile: dest=/etc/sudoers state=present line='%scheduler ALL=(ALL) NOPASSWD:ALL'
