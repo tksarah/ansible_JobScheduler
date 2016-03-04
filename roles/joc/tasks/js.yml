@@ -10,7 +10,11 @@
     shell: /tmp/{{ jdir }}/setup.sh /tmp/{{ jdir }}/jobscheduler_install.xml creates="{{ installpath }}"
 
   - name: For Japanese
-    replace: dest=/home/scheduler/sos-berlin.com/jobscheduler/scheduler/config/operations_gui/custom.js regexp='^_sos_lang(\s+)\=(\s+)\'(.*)\'\;$' replace='_sos_lang\1=\2\'ja\';' backup=yes
+    replace:
+      dest: "{{ UserPathPanelElement }}/scheduler/config/operations_gui/custom.js"
+      regexp: '^_sos_lang(\s+)\=(\s+)\'(.*)\'\;$'
+      replace: '_sos_lang\1=\2\'ja\';'
+      backup: yes
     when: sos_lang == 'ja'
 
   - name: Create sample directory
