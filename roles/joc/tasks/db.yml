@@ -4,8 +4,8 @@
     - MySQL-python
     - mariadb-server
   environment:
-    http_proxy: "http://tie304410:SunTakeshi01@10.10.10.10:8080"
-    https_proxy: "http://tie304410:SunTakeshi01@10.10.10.10:8080"
+    http_proxy: "http://user:pass@10.10.10.10:8080"
+    https_proxy: "http://user:pass01@10.10.10.10:8080"
 
 - name: Start Mariadb
   service: name=mariadb.service enabled=yes state=started enabled=yes
